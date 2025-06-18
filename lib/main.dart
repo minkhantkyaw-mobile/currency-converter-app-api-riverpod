@@ -1,5 +1,6 @@
 import 'package:currency_converter_app_sl/screens/home_with_cbBank.dart';
 import 'package:currency_converter_app_sl/screens/riverpod_test_screen.dart';
+import 'package:currency_converter_app_sl/screens/todo_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: RiverpodTestScreen(),
+      home: TodoHomeScreen(),
     );
   }
 }

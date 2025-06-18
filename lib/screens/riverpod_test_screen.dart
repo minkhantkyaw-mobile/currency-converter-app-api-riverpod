@@ -11,42 +11,41 @@ class RiverpodTestScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // var value = ref.watch(counterStateProvider);
 
-    print("value");
     return Scaffold(
       appBar: AppBar(title: Text("RiverPods testing")),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              onChanged: (value) {
-                ref.read(searchProvider.notifier).search(value);
-              },
-            ),
-            Consumer(
-              builder: (context, ref, child) {
-                final search = ref.watch(
-                  searchProvider.select((state) => state.search),
-                );
-                print("one");
-                return Text("The result" + search);
-              },
-            ),
-            Consumer(
-              builder: (context, ref, child) {
-                final change = ref.watch(
-                  searchProvider.select((state) => state.isChange),
-                );
-                return Switch(
-                  value: change,
-                  onChanged: (value) {
-                    ref.read(searchProvider.notifier).onChange(value);
-                  },
-                );
-              },
-            ),
-          ],
-        ),
+        // child: Column(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     TextField(
+        //       onChanged: (value) {
+        //         ref.read(searchProvider.notifier).search(value);
+        //       },
+        //     ),
+        //     Consumer(
+        //       builder: (context, ref, child) {
+        //         final search = ref.watch(
+        //           searchProvider.select((state) => state.search),
+        //         );
+        //         print("one");
+        //         return Text("The result" + search);
+        //       },
+        //     ),
+        //     Consumer(
+        //       builder: (context, ref, child) {
+        //         final change = ref.watch(
+        //           searchProvider.select((state) => state.isChange),
+        //         );
+        //         return Switch(
+        //           value: change,
+        //           onChanged: (value) {
+        //             ref.read(searchProvider.notifier).onChange(value);
+        //           },
+        //         );
+        //       },
+        //     ),
+        //   ],
+        // ),
         /////////////////////
         ///State Provider Testing
         ////////////////////
