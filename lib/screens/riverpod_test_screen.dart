@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class RiverpodTestScreen extends ConsumerWidget {
   const RiverpodTestScreen({super.key});
 
+  //const RiverpodTestScreen(super._state, );
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // var value = ref.watch(counterStateProvider);
@@ -37,16 +39,17 @@ class RiverpodTestScreen extends ConsumerWidget {
             ),
             SizedBox(height: 30),
             Consumer(
-              builder: (context, ref1, child) {
-                final value = ref1.watch(counterStateProvider);
-                final jokeAsync = ref1.watch(getApi);
+              builder: (context, ref, child) {
+                final value = ref.watch(counterStateProvider);
+                final jokeAsync = ref.watch(getApi);
+                final slider = ref.watch(sliderProvider);
                 return Center(
                   child: Column(
                     children: [
                       Text(value.toString()),
                       ElevatedButton(
                         onPressed: () {
-                          ref1.read(counterStateProvider.state).state++;
+                          ref.read(counterStateProvider.state).state++;
                         },
                         child: Icon(Icons.add),
                       ),
@@ -61,6 +64,40 @@ class RiverpodTestScreen extends ConsumerWidget {
                             ),
                         error: (e, st) => Text("error $e"),
                         loading: () => CircularProgressIndicator(),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          final statePassword = ref.read(
+                            sliderProvider.notifier,
+                          );
+                          statePassword.state = statePassword.state.copyWith(
+                            showPassword: !slider.showPassword,
+                          );
+                        },
+                        child: Container(
+                          width: 200,
+                          height: 200,
+                          child:
+                              slider.showPassword
+                                  ? Icon(Icons.remove_red_eye)
+                                  : Icon(Icons.image),
+                        ),
+                      ),
+                      Container(
+                        height: 200,
+                        width: 200,
+                        color: Colors.red.withOpacity(slider.slider),
+                      ),
+                      Slider(
+                        value: slider.slider,
+                        onChanged: (value) {
+                          final stateProvider = ref.read(
+                            sliderProvider.notifier,
+                          );
+                          stateProvider.state = stateProvider.state.copyWith(
+                            slider: value,
+                          );
+                        },
                       ),
                     ],
                   ),
